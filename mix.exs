@@ -37,7 +37,7 @@ defmodule Turbo.Ecto.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:ecto_sql, "~> 3.0"},
+      {:ecto_sql, "~> 3.7"},
       {:postgrex, ">= 0.0.0", only: :test},
       {:ex_machina, "~> 2.4", only: :test},
       {:excoveralls, "~> 0.13.3", only: :test},

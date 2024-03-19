@@ -10,7 +10,7 @@ defmodule Turbo.Ecto.Builder.OrderBy do
   def build(query, sorts, binding) do
     query
     |> Macro.escape()
-    |> OrderBy.build(binding, Enum.map(sorts, &expr/1), __ENV__)
+    |> OrderBy.build(binding, Enum.map(sorts, &expr/1), :prepend, __ENV__)
     |> Code.eval_quoted()
     |> elem(0)
   end
