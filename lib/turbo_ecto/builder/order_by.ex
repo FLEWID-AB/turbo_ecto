@@ -8,22 +8,9 @@ defmodule Turbo.Ecto.Builder.OrderBy do
   """
   @spec build(Macro.t(), [Macro.t()], [Macro.t()]) :: Macro.t()
   def build(query, sorts, binding) do
-    query = query
-    |> Macro.escape()
-
-    IO.puts("\nQUERY: #{inspect(query, limit: :infinity)}\n")
-    IO.puts("\nBINDING: #{inspect(binding, limit: :infinity)}\n")
-
-    expr = Enum.map(sorts, &expr/1)
-    op = :prepend
-    env = __ENV__
-
-    IO.puts("\nEXPR: #{inspect(expr, limit: :infinity)}\n")
-    IO.puts("\nOP: #{inspect(op, limit: :infinity)}\n")
-    IO.puts("\nENV: #{inspect(env, limit: :infinity)}\n")
-    
     query
-    |> OrderBy.build(binding, expr, op, env)
+    |> Macro.escape()
+    |> OrderBy.build(binding, Enum.map(sorts, &expr/1), :append, __ENV__)
     |> Code.eval_quoted()
     |> elem(0)
   end
